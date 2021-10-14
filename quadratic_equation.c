@@ -1,51 +1,77 @@
+/*! \file quadratic_equation.c
+    \brief body of functions 
+    
+    this file contains the body of fubctions
+*/
 #include "quadratic_equation.h"
 
-exceptions solveSquareProblem(double *x1, double *x2, double a, double b, double c){
-    double D = b*b - 4 * a * c; 
-    if(a == 0){
-        return solveLineProblem(b,c,x1,x2);
-    }
-    else if (fabs(D) < EPS) {
-        *x1 = -b / (2 * a);
-        *x2 = *x1;
-        return One_solution;
-    }
-    if(D>EPS){
-        *x1 = (-b + sqrt(D)) / (2 * a);
-        *x2 = (-b - sqrt(D)) / (2 * a);
-        return Two_solutions;
-    }
-    else {
-        return No_solutions;
-    }
-}
-
-void print_ans(double x1, double x2, exceptions exception){
-    if (exception == Two_solutions)
-    {
-        printf("x1 = %lf\nx2 = %lf\n",x1,x2);
-    }
-    else if (exception == One_solution)
-    {
-        printf("I solved the quadratic equation, where x1=x2\n");
-        printf("x=%lf",x1);
-    }
-    else if (exception == Linear_equation){
-        printf("I solved the linear equation\n");
-        printf("x=%lf",x1);
-    }
-    else if (exception == Inappropriate_b)
-    {
-        printf("x belongs to the empty set\n");
-    }
-    else if (exception == Zero_values) {
-        printf("x belongs to the R set \n");
+/*! \fn exceptions solveSquareProblem(double *x1, double *x2, double a, double b, double c)
+    \brief Soleves quadratic equation 
+    \param x1 the first double pointer
+    \param x2 the first double pointer
+    \param a the first doublt ratio
+    \param b the second doublt ratio
+    \param c the fird doublt ratio
+*/
+exceptions solveSquareProblem(double *x1, double *x2, double a, double b, double c){ 
+    if(fabs(a)>EPS){
+        double D = b*b - 4 * a * c;
+        if(D>EPS){
+            *x1 = (-b + sqrt(D)) / (2 * a);
+            *x2 = (-b - sqrt(D)) / (2 * a);
+            return Two_solutions;
+        }
+        else if (fabs(D) < EPS) {
+            *x1 = -b / (2 * a);
+            *x2 = *x1;
+            return One_solution;
+        }
+        else {
+            return No_solutions;
+        }
     }
     else{
-        printf("D < 0 ; x belongs to the empty set\n");
+        return solveLineProblem(b,c,x1,x2);
     }
- }
-
+}
+/*! \fn void print_ans(double x1, double x2, exceptions exception)
+    \brief prints solutions of quadratic and linear equations 
+    \param x1 the first double param
+    \param x2 the first double param
+    \param exception third exceptions type param 
+*/
+void print_ans(double x1, double x2, exceptions exception){
+    switch (exception)
+    {
+        case Two_solutions:
+            printf("I solved the quadratic equation\n");
+            printf("x1 = %lf\nx2 = %lf\n",x1,x2);
+            break;
+        case One_solution: 
+            printf("I solved the quadratic equation, where x1=x2\n");
+            printf("x=%lf",x1);
+            break;
+        case Linear_one_solution:
+            printf("I solved the linear equation\n");
+            printf("x=%lf",x1);
+            break; 
+        case Linear_no_solution:
+            printf("x belongs to the empty set\n");
+            break;
+        case Linear_infinity_solution:
+            printf("x belongs to the R set\n");
+            break;
+        case No_solutions:
+            printf("D < 0 ; x belongs to the empty set\n");
+            break;
+        }
+    }
+/*! \fn void safe_scan(double* a, double* b, double* c)
+    \brief safly scans the values from console
+    \param a the first double pointer
+    \param b the second double pointer
+    \param c the third double pointer 
+*/
  void safe_scan(double* a, double* b, double* c) {
     printf("Hello, I am a quadratic solver. Please, enter 3 nombers:\n");
     assert(a != NULL);
@@ -57,17 +83,33 @@ void print_ans(double x1, double x2, exceptions exception){
         while (getchar() != '\n');
     }
 }  
-
+/*! \fn exceptions solveLineProblem(double b, double c, double* x1, double* x2)
+    \brief Soleves linear equation 
+    \param b a double coefficient before x.
+    \param c  a double free coefficient.
+    \param x1 the first double pointer.
+    \param x2 the second double pointer.
+*/ 
 exceptions solveLineProblem(double b, double c, double* x1, double* x2) {
-    if (b == 0 && c == 0)
+    if (fabs(b) > EPS)
     {
-        return Zero_values;
+        if (fabs(c) > EPS)
+        {
+            *x1 = -c / b;
+            *x2 = *x1;
+            return Linear_one_solution;
+        }
+        else{
+            return Linear_infinity_solution;
+        }
     }
-    if (b == 0)
-    {
-        return Inappropriate_b;
+    else{
+        if (fabs(c) > EPS)
+        {
+            return Linear_no_solution;
+        }
+        else{
+            return Linear_infinity_solution;
+        }
     }
-    *x1 = -c / b;
-    *x2 = *x1;
-    return Linear_equation;
-}
+}ячсмитььбю.

@@ -2,7 +2,14 @@
 #include <math.h>
 #include <assert.h>
 #include "quadratic_equation.c"
+/*! \file ConsoleApplication.c
+    \brief functions includes main function
 
+*/
+/*! \fn int main()
+    \brief Soleves quadratic equation 
+    
+*/
 int main()
 {
     double a = 0, b = 0, c = 0, x1 = 0, x2 = 0; exceptions exception; 
