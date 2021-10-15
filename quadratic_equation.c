@@ -4,7 +4,9 @@
     this file contains the body of fubctions
 */
 #include "quadratic_equation.h"
-
+#include <math.h>
+#include <stdio.h>
+#include <assert.h>
 /*! \fn exceptions solveSquareProblem(double *x1, double *x2, double a, double b, double c)
     \brief Soleves quadratic equation 
     \param x1 the first double pointer
@@ -73,7 +75,7 @@ void print_ans(double x1, double x2, exceptions exception){
     \param c the third double pointer 
 */
  void safe_scan(double* a, double* b, double* c) {
-    printf("Hello, I am a quadratic solver. Please, enter 3 nombers:\n");
+    printf("Hello, I am a quadratic solver. Please, enter 3 numbers:\n");
     assert(a != NULL);
     assert(b != NULL);
     assert(c != NULL);
@@ -112,4 +114,4 @@ exceptions solveLineProblem(double b, double c, double* x1, double* x2) {
             return Linear_infinity_solution;
         }
     }
-}ячсмитььбю.
+}

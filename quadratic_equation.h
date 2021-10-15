@@ -1,4 +1,3 @@
-#pragma once
 /*! \file quadratic_equation.h
     \brief functions prototypes 
     
@@ -18,7 +17,4 @@ exceptions solveSquareProblem(double *x1, double *x2, double a, double b, double
 void print_ans(double x1, double x2, exceptions exception);
 void safe_scan(double* a, double* b, double* c);
 exceptions solveLineProblem(double b, double c, double* x1, double* x2);
-/** An enum type. 
-     *  The documentation block cannot be put after the enum! 
- */
 
