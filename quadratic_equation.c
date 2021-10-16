@@ -93,6 +93,8 @@ void print_ans(double x1, double x2, exceptions exception){
     \param x2 the second double pointer.
 */ 
 exceptions solveLineProblem(double b, double c, double* x1, double* x2) {
+    assert(x1 != NULL);
+    assert(x2 != NULL);
     if (fabs(b) > EPS)
     {
         if (fabs(c) > EPS)
